@@ -1,4 +1,4 @@
-CUR_DIR = QuanLyCanBo
+CUR_DIR = QuanLyTaiLieu
 CC = gcc
 CXX = g++
 LIBS =

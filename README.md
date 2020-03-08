@@ -15,3 +15,6 @@ OOP - Quan Ly Tai Lieu
     Hiển thị thông tin về các tài liệu
     Tìm kiếm tài liệu theo loại
     Thoát khỏi chương trình
+
+add dong 19
+chinh sua tren remote
