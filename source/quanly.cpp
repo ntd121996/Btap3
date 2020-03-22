@@ -6,7 +6,7 @@ void TaiLieu::Xuat()
     cout << "Nha Xuat Ban: " << this->NhaXuatBan <<endl;
     cout << "So Luong Phat Hanh: " << this->SoLuongPhatHanh <<endl;
 }
-void TaiLieu::Nhap()
+void TaiLieu::Nhap(string *matailieu )
 {
     cout << "Nhap Ten NXB" << endl;
     cin.get();
@@ -22,9 +22,9 @@ void Sach::Xuat()
     cout << "Ten Tac Gia: " << this->TenTacGia <<endl;
     cout << "So Trang: " << this->SoTrang <<endl;
 }
-void Sach::Nhap()
+void Sach::Nhap( string *matailieu )
 {
-    TaiLieu::Nhap();
+    TaiLieu::Nhap( matailieu );
     cout << "Nhap Ten Tac Gia" << endl;
     cin.get();
     getline( cin,this->TenTacGia );
@@ -32,7 +32,7 @@ void Sach::Nhap()
     cout << "Nhap So Trang" <<endl;
     cin >> this->SoTrang;
 
-    this->MaTailieu = "Sach";
+    *matailieu = this->MaTailieu = "Sach";
 }
 
 
@@ -42,16 +42,16 @@ void TapChi::Xuat()
     cout << "So Phat Hanh: " << this->SoPhatHanh <<endl;
     cout << "Thang Phat Hanh: " << this->ThangPhatHanh <<endl;
 }
-void TapChi::Nhap()
+void TapChi::Nhap( string *matailieu )
 {
-    TaiLieu::Nhap();
+    TaiLieu::Nhap( matailieu );
     cout << "Nhap So Phat Hanh" <<endl;
     cin >> this->SoPhatHanh;
 
     cout << "Nhap So Thang Phat Hanh" <<endl;
     cin >> this->ThangPhatHanh;
 
-    this->MaTailieu = "TapChi";
+    *matailieu = this->MaTailieu = "TapChi";
 }
 
 void Bao::Xuat()
@@ -59,13 +59,13 @@ void Bao::Xuat()
     TaiLieu::Xuat();
     cout << "Ngay Phat Hanh: " << this->NgayPhatHanh <<endl;
 }
-void Bao::Nhap()
+void Bao::Nhap( string *matailieu )
 {
-    TaiLieu::Nhap();
+    TaiLieu::Nhap( matailieu );
     cout << "Nhap So Ngay Phat Hanh" <<endl;
     cin >> this->NgayPhatHanh;
 
-    this->MaTailieu = "Bao";
+    *matailieu = this->MaTailieu = "Bao";
 }
 
 void QuanLyTaiLieu::Xuat()
@@ -76,8 +76,9 @@ void QuanLyTaiLieu::Xuat()
 }
 void QuanLyTaiLieu::Nhap( TaiLieu *tailieu )
 {
-    tailieu->Nhap();
-    this->MapTaiLieu.insert( pair<string,TaiLieu *>( tailieu->MaTailieu,tailieu ));
+    string MaTaiLieu;
+    tailieu->Nhap(&MaTaiLieu);
+    this->MapTaiLieu.insert( pair<string,TaiLieu *>( MaTaiLieu,tailieu ));
 }
 void QuanLyTaiLieu::Timkiem( string MaTaiLieu )
 {

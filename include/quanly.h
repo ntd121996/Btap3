@@ -11,14 +11,15 @@ using namespace std;
 
 class TaiLieu
 {
-public:
-    string MaTailieu;
+
+    
 protected:
+    string MaTailieu;
     string NhaXuatBan;
     uint32_t   SoLuongPhatHanh;
 
 public:
-    virtual void Nhap();
+    virtual void Nhap(string* matailieu);
     virtual void Xuat();
     TaiLieu(){}
     virtual ~TaiLieu(){}
@@ -31,7 +32,7 @@ private:
     uint32_t SoTrang;
     /* data */
 public:
-    void Nhap();
+    void Nhap(string* matailieu);
     void Xuat();
     Sach():TaiLieu(){}
     ~Sach(){}
@@ -43,7 +44,7 @@ private:
     uint32_t SoPhatHanh;
     uint32_t ThangPhatHanh;
 public:
-    void Nhap();
+    void Nhap(string* matailieu);
     void Xuat();
     TapChi():TaiLieu(){}
     ~TapChi(){}
@@ -53,7 +54,7 @@ class Bao : public TaiLieu
 private:
     uint32_t NgayPhatHanh;
 public:
-    void Nhap();
+    void Nhap(string* matailieu);
     void Xuat();
     Bao():TaiLieu(){}
     ~Bao(){}
