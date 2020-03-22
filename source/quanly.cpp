@@ -1,65 +1,97 @@
 #include "quanly.h"
 
-TaiLieu::TaiLieu(/* args */)
-{
-
-}
-TaiLieu::~TaiLieu()
-{
-}
 void TaiLieu::Xuat()
 {
-
+    cout << "\nMa Tai Lieu: " << this->MaTailieu <<endl;
+    cout << "Nha Xuat Ban: " << this->NhaXuatBan <<endl;
+    cout << "So Luong Phat Hanh: " << this->SoLuongPhatHanh <<endl;
 }
-Sach::Sach(/* args */)
+void TaiLieu::Nhap()
 {
+    cout << "Nhap Ten NXB" << endl;
+    cin.get();
+    getline( cin,this->NhaXuatBan );
+    
+    cout << "Nhap So Luong Phat Hanh" <<endl;
+    cin >> this->SoLuongPhatHanh;
 }
 
-Sach::~Sach()
-{
-}
 void Sach::Xuat()
 {
-
+    TaiLieu::Xuat();
+    cout << "Ten Tac Gia: " << this->TenTacGia <<endl;
+    cout << "So Trang: " << this->SoTrang <<endl;
 }
-TapChi::TapChi(/* args */)
+void Sach::Nhap()
 {
+    TaiLieu::Nhap();
+    cout << "Nhap Ten Tac Gia" << endl;
+    cin.get();
+    getline( cin,this->TenTacGia );
+    
+    cout << "Nhap So Trang" <<endl;
+    cin >> this->SoTrang;
+
+    this->MaTailieu = "Sach";
 }
 
-TapChi::~TapChi()
-{
-}
+
 void TapChi::Xuat()
 {
-
+    TaiLieu::Xuat();
+    cout << "So Phat Hanh: " << this->SoPhatHanh <<endl;
+    cout << "Thang Phat Hanh: " << this->ThangPhatHanh <<endl;
 }
-Bao::Bao(/* args */)
+void TapChi::Nhap()
 {
+    TaiLieu::Nhap();
+    cout << "Nhap So Phat Hanh" <<endl;
+    cin >> this->SoPhatHanh;
+
+    cout << "Nhap So Thang Phat Hanh" <<endl;
+    cin >> this->ThangPhatHanh;
+
+    this->MaTailieu = "TapChi";
 }
 
-Bao::~Bao()
-{
-}
 void Bao::Xuat()
 {
-
+    TaiLieu::Xuat();
+    cout << "Ngay Phat Hanh: " << this->NgayPhatHanh <<endl;
 }
-QuanLyTaiLieu::QuanLyTaiLieu(/* args */)
+void Bao::Nhap()
 {
+    TaiLieu::Nhap();
+    cout << "Nhap So Ngay Phat Hanh" <<endl;
+    cin >> this->NgayPhatHanh;
+
+    this->MaTailieu = "Bao";
 }
 
-QuanLyTaiLieu::~QuanLyTaiLieu()
-{
-}
 void QuanLyTaiLieu::Xuat()
 {
-
+    map<string, TaiLieu*>::iterator it;
+    for( it = this->MapTaiLieu.begin(); it != this->MapTaiLieu.end(); it++ )
+    it->second->Xuat();
 }
-void QuanLyTaiLieu::Nhap( string MaTaiLieu, TaiLieu *tailieu )
+void QuanLyTaiLieu::Nhap( TaiLieu *tailieu )
 {
-    this->MapTaiLieu.insert( pair<string,TaiLieu>( MaTaiLieu,*tailieu ));
+    tailieu->Nhap();
+    this->MapTaiLieu.insert( pair<string,TaiLieu *>( tailieu->MaTailieu,tailieu ));
 }
 void QuanLyTaiLieu::Timkiem( string MaTaiLieu )
 {
-
+    map<string, TaiLieu*>::iterator it;
+    it = this->MapTaiLieu.find(MaTaiLieu);
+    for( it = this->MapTaiLieu.find(MaTaiLieu); it != this->MapTaiLieu.end(); it++)
+    {
+        if( it != this->MapTaiLieu.end() && it->first == MaTaiLieu)
+        {
+            it->second->Xuat();
+        }
+        else
+        {
+            cout << "invalid";
+        }
+    }
 }
