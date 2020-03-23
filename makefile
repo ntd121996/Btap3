@@ -1,18 +1,18 @@
-CUR_DIR = QuanLyTaiLieu
+CUR_DIR =
 CC = gcc
 CXX = g++
 LIBS =
-CXXFLAGS = -g -Wall
+CXXFLAGS = -g -Wall -std=c++11
 #Include Direction
-INCLUDE_DIR = ../$(CUR_DIR)/include
+INCLUDE_DIR = include
 
 #Source File Direction
-SOURCEC_DIR = ../$(CUR_DIR)/source
+SOURCEC_DIR = source
 
 INCLUDE_BUILD = -I$(INCLUDE_DIR) \
 -I.
 
-DEBUG = ../$(CUR_DIR)/Debug# Create folder to save objects
+DEBUG = Debug# Create folder to save objects
 
 #Source File .cpp
 SOURCE = quanly_main.cpp quanly.cpp

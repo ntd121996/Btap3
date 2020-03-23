@@ -1,58 +1,127 @@
 #include "quanly.h"
 
-int count = 1;
-bool first = true;
-int n = 9;
-char Array[9];
-int Check[9] ={ 1,1,1,1,1,1,1,1,1};
-int value;
-bool CheckValid( int i, int k)
+void displayScreen()
 {
-    if( k == 8 )
-    {
-        if( first )
-        {
-            first = false;
-            return false;
-        }
-    }
-    if (count == 20) return false;
-    return true;
+    cout << "1.Nhap Thong Tin Moi"; cout << endl;
+    cout << "2.Tim Kiem Theo Loai"; cout << endl;
+    cout << "3.Hien Thi Thong Tin Ve Danh Sach"; cout << endl;
+    cout << "4.Thoat Chuong Trinh"; cout << endl;
 }
-void printfSolution()
+void displayChoice()
 {
-    cout << "So thu " << count++ << ":";
-    value = atoi( Array );
-    cout << value << endl;
-
+    cout << "1.Nhap Thong Tin Cho Sach"; cout << endl;
+    cout << "2.Nhap Thong Tin Cho Tap Chi"; cout << endl;
+    cout << "3.Nhap Thong Tin Cho Bao"; cout << endl;
+    cout << "4.Thoat Chuong Trinh"; cout << endl;
 }
-void Try( int k )
+void ClearScreen()
 {
-    int i;
-    for( i = 0x30; i <= 0x39; i++ )
+    cout << string( 3, '\n');
+}
+int main ( int argc, char **argv )
+{
+    string uiSelect;
+    uint32_t Value;
+    uint32_t Choice;
+    QuanLyTaiLieu Quanly;
+    bool exit = false;
+    string MaTaiLieu;
+    do
     {
-        if( CheckValid( i , k ))
+        displayScreen();
+        do
         {
-            Array[ k ] = i;
-            
-            if (k  == n - 1)
+            try
             {
-                printfSolution();
+                cin >> uiSelect;
+                Value = stoi( uiSelect,nullptr,0 );
+            }
+            catch( std::exception &e)
+            {
+                // cout << e.what() << endl;
+                // continue;
+            }
+            if ( Value < 1 || Value > 4 )
+            {
+                cout << " Vui Long Nhap Lai Gia Tri Tu 1 -> 4 " << endl;
             }
             else
             {
-                Try ( k + 1 );
+                cout << "Chon So " << Value << endl;
+                break;
             }
-            
         }
+        while(Value < 1 || Value > 4);
+
+        switch ( Value )
+        {
+            case 1:
+                ClearScreen();
+                displayChoice();
+                do
+                {
+                    try
+                    {
+                        cin >> uiSelect;
+                        Choice = stoi( uiSelect,nullptr,0 );
+                    }
+                    catch( std::exception &e)
+                    {
+                        // cout << e.what() << endl;
+                        // continue;
+                    }
+                    if ( Choice < 1 || Choice > 4 )
+                    {
+                        cout << " Vui Long Nhap Lai Gia Tri Tu 1 -> 4 " << endl;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                while ( Choice < 1 || Choice > 4 );
+                if( Choice == 1)
+                {
+                    // Nhap cho Sach
+                    Sach *sach = new Sach();
+                    Quanly.Nhap( sach);
+                }
+                if( Choice == 2)
+                {
+                    // Nhap cho Tap Chi
+                    TapChi *tapchi = new TapChi();
+                    Quanly.Nhap( tapchi);
+                }
+                if( Choice == 3)
+                {
+                    // Nhap cho Bao
+                    Bao *bao = new Bao();
+                    Quanly.Nhap( bao);
+                }
+                break;
+            case 2:
+                cout << "\nChon Tim Kiem: \n";
+                cin.get();
+                cin >> MaTaiLieu;
+                Quanly.Timkiem( MaTaiLieu );
+                break;
+            case 3:
+                
+                Quanly.Xuat();
+                break;
+            case 4:
+                exit = true;
+                break;
+            default:
+                break;
+        }   
+            cin.get();
+            cout << "\nEnter to continue ..." << endl;
+            cin.get();
+            ClearScreen();
+            Choice = Value = 0;
     }
-
-}
-
-int main ( int argc, char** argv )
-{
-
-    Try( 0 );
-
+    while( exit == false);
+    cout << "Exit ...";
     return 0;
 }
