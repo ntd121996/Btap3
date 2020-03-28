@@ -2,7 +2,8 @@ CUR_DIR =
 CC = gcc
 CXX = g++
 LIBS =
-CXXFLAGS = -g -Wall -std=c++11
+CXXFLAGS = -g -Wall
+CXXFLAGS += -std=c++11
 #Include Direction
 INCLUDE_DIR = include
 
@@ -15,7 +16,15 @@ INCLUDE_BUILD = -I$(INCLUDE_DIR) \
 DEBUG = Debug# Create folder to save objects
 
 #Source File .cpp
-SOURCE = quanly_main.cpp quanly.cpp
+SOURCE = \
+main.cpp \
+quanlytailieu.cpp \
+bao.cpp \
+sach.cpp \
+tailieu.cpp \
+tapchi.cpp \
+
+
 #Source fullpath to build
 SOURCE_BUILD = $(patsubst %.cpp,$(DEBUG)/%.o,$(SOURCE))#Convert .cpp -> .o with new folder
 # patsubst( pattern ,replacement, text)
@@ -29,7 +38,7 @@ $(DEBUG)/%.o : $(SOURCEC_DIR)/%.cpp  #compile with new folder
 	$(CXX) -c $(CXXFLAGS) -o $@ $< $(INCLUDE_BUILD)
 
 $(EXE): $(SOURCE_BUILD)#linker with new folder
-	@echo Processing ...
+	@echo Linking ...
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(INCLUDE_BUILD)$(LIBS)
 	@echo Build Success !!!
 

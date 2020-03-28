@@ -1,4 +1,7 @@
-#include "quanly.h"
+#include "quanlytailieu.h"
+#include "tapchi.h"
+#include "sach.h"
+#include "bao.h"
 
 void displayScreen()
 {
